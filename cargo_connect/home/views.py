@@ -194,8 +194,8 @@ def deleteOrder(request, pk):
 			order.product.note = ''
 			order.product.save()
 		elif order.status == "Delivered":
-			order.note = 'alt'
-			order.save()
+			order.product.note = 'taken'
+			order.delete()
 		return redirect('customer_view', pk = usr.pk)
 		
 	return render(request, 'home/delete_item.html', {'parcel':parcel, 'order':order})
