@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<!-- 
+<div class="row">
+	<div class="col-md-6">
+		<div class="card card-body">
+			{% if action == 'create' %}
+				<h3>Create Order</h3>
+			{% elif action == 'update' %}
+				<h3>Update Order</h3>
+			{% endif %}
+			
+		</div>
+	</div>
+</div> -->
+
+<div class="row justify-content-center" style="margin-top: 20px;"> <!-- Optional margin-top for top space -->
+    <div class="col-md-6">
+        <div class="card card-body" style="padding: 20px; border-radius: 8px; background-color: #f8f9fa; border: 1px solid #ccc;">
+            <!-- Heading 'Update Your Information' at the top of the form -->
+            <h3 class="text-center mb-4">Take Parcel</h3>
+
+            <form action="" method="POST">
+                {% csrf_token %}
+
+                <!-- Uncomment this if using formset
+                {{ formset.management_form }}
+                {% for form in formset %}
+                    {{ form }}
+                    <br>
+                {% endfor %}
+                -->
+
+                {{ form|crispy }}  <!-- Renders the form fields with crispy styling -->
+
+                <hr>
+                <input type="submit" class="btn btn-info">
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
