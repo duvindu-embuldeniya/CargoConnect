@@ -1,0 +1,45 @@
+
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+    
+    <div class="d-flex justify-content-center" style="margin-top: 80px;">
+        <div class="content-section" style="width: 100%; max-width: 500px; border: 1px solid #ccc; background-color: #f8f9fa; padding: 20px; border-radius: 8px;">
+            <div class="media">
+            
+                <img class="rounded-circle mx-auto d-block" src="{{ user.profile.imageURL }}" height="120px" width="100px">
+                <div class="media-body text-center mt-3">
+                    <h2 class="account-heading">{{ user.username }}</h2>
+                    <p class="text-secondary">{{ user.email }}</p>
+                </div>
+            </div>
+            <br>
+            <form action="" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                {{u_form|crispy}}
+                {{p_form|crispy}}
+                
+                <small class="text-muted ml-2">
+                    <a href="{% url 'password_reset' %}">Change Password</a>
+                </small>
+        
+                <!-- Buttons for Update and Delete -->
+                <div class="d-flex justify-content-between mt-3">
+                    <button type="submit" class="btn btn-primary w-48">Update</button>
+                    <a href="{% url 'delete_profile' request.user.username %}" class="btn btn-danger w-48 text-white" >Delete</a>
+                </div>
+
+            </form>
+            
+        </div>
+    </div>
+    
+    
+ 
+    
+    
+    
+    
+{% endblock content %}

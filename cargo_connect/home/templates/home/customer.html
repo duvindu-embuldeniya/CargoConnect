@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+<br>
+
+<div class="row">
+	<div class="col-md" style="padding-bottom: 1em">
+		<div class="card card-body">
+			<h5>Contribute</h5>
+			<hr>
+			{% if request.user == customer %}
+				<a class="btn btn-outline-info  btn-sm btn-block" href="{% url 'take_parcel' customer.pk %}">Take Parcel</a>
+			{% else %}
+				<td><a class="btn btn-sm btn-secondary" href="">N/A</a></td>
+			{% endif %}
+			<!-- <a class="btn btn-outline-danger  btn-sm btn-block" href="">Delete Customer</a> -->
+
+		</div>
+	</div>
+
+	<div class="col-md" style="padding-bottom: 1em">
+		<div class="card card-body">
+			<h5>Contact Information</h5>
+			<hr>
+			<p>Email: {{customer.email}}</p>
+			<p>Telephone: {{customer.profile.telephone}}</p>
+		</div>
+	</div>
+
+	<div class="col-md" >
+		<div class="card card-body">
+			<h5>Total Contributions</h5>
+			<hr>
+			<h1 style="text-align: center;padding: 10px">{{total_orders}}</h1>
+		</div>
+	</div>
+</div>
+
+
+<br>
+<!-- <div class="row">
+	<div class="col">
+		<div class="card card-body">
+			<form method="get">
+		    {% for field in filter.form %}
+		    	{{field.label}}
+				 {{field}}
+		    {% endfor %}
+		    <button class="btn btn-primary" type="submit">Search</button>
+		  </form>
+		</div>
+	</div>
+	
+</div> -->
+<br>
+
+<h4 class="mb-2">Delivery Records:-</h4>
+<div class="row">
+	<div class="col-md">
+		<div class="card card-body">
+			<table class="table table-sm">
+				<tr>
+					<th>Product</th>
+					<th>Date Orderd</th>
+					<th>Status</th>
+					<th>Update</th>
+					<th>Remove</th>
+				</tr>
+				{% for order in orders %}
+					{% if order.note != 'alt' %}
+						<tr>
+							<td>{{order.product}}</td>
+							<td>{{order.date_created}}</td>
+							<td>{{order.status}}</td>
+							{% if request.user == customer %}
+								<td><a class="btn btn-sm btn-warning" href="{% url 'update_order' order.id %}">Update</a></td>
+								<td><a class="btn btn-sm btn-danger" href="{% url 'delete_order' order.id %}">Remove</a></td>
+							{% else %}
+								<td><a class="btn btn-sm btn-secondary" href="">N/A</a></td>
+								<td><a class="btn btn-sm btn-secondary" href="">N/A</a></td>
+							{% endif %}
+						</tr>
+					{% endif %}
+				{% endfor %}
+			</table>
+		</div>
+	</div>
+</div>
+	
+
+
+{% endblock content %}
