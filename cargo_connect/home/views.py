@@ -12,7 +12,7 @@ from django.contrib import messages
 from . forms import UserUpdateForm, ProfileUpdateForm
  
 def home(request):
-	orders = Order.objects.all().order_by('-date_created')[0:5]
+	orders = Order.objects.all().order_by('-date_created')[0:10]
 	users = User.objects.all()
 	total_orders = Order.objects.all().count()
 	delivered = Order.objects.filter(status='Delivered').count()
